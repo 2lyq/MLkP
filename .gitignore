@@ -1,0 +1,41 @@
+# Build directories
+cmake-build-*/
+build/
+out/
+
+# IDE/editor files
+.idea/
+.vscode/
+*.iml
+
+# CMake generated files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+CTestTestfile.cmake
+Testing/
+
+# Compiled binaries and libraries
+*.exe
+*.dll
+*.lib
+*.a
+*.obj
+*.o
+*.pdb
+
+# Generated result files
+PatternSummary*.txt
+Colocation.txt
+PatternsScore*.txt
+MSRCount*.txt
+ColocationDebug*.txt
+Regional Colocation_*/
+Regional Colocation*/
+pattern_*_nonzero_instances.txt
+pattern_allRI*.txt
+
+# OS files
+.DS_Store
+Thumbs.db
