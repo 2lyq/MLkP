@@ -22,7 +22,7 @@ B,1,116.223456,39.223456
 Column meaning:
 
 - `Feature`: feature type or category
-- `Instance`: instance label within the feature
+- `InstanceID`: instance id within the feature
 - `LocationX`: x coordinate
 - `LocationY`: y coordinate
 
@@ -61,9 +61,8 @@ Parameters:
 
 The program writes result files to the current working directory:
 
-- `PatternSummary<distance>.txt`: pattern count, global co-location count, average QS, and runtime
+- `PatternSummary<k>.txt`: k-size local co-location pattern count, k-size global co-location pattern count, and runtime
 - `Colocation.txt`: global co-location patterns
 - `PatternsScore<k>.txt`: regional pattern scores
-- `MSRCount<k>.txt`: LCP/MSR count summary
 - `Regional Colocation_/<k>/*.csv`: mined regional instances for each pattern/MSR
 

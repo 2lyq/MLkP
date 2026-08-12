@@ -86,17 +86,13 @@ int main(int argc, char **argv) {
     for (const auto &kv: RegionalPs) {
         averageQS += kv.second.second;
     }
-    if (!RegionalPs.empty()) {
-        averageQS /= static_cast<double>(RegionalPs.size());
-    }
 
     {
-        string filename = "PatternSummary" + to_string(distance) + ".txt";
+        string filename = "PatternSummary" + to_string(k) + ".txt";
         ofstream PatternSummary(filename);
         if (PatternSummary.is_open()) {
-            PatternSummary << "PatternCount," << RegionalPs.size() << '\n';
-            PatternSummary << "GlobalColocationCount," << Colocation.size() << '\n';
-            PatternSummary << "AverageQS," << std::fixed << std::setprecision(10) << averageQS << '\n';
+            PatternSummary << "LCPs Count," << RegionalPs.size() << '\n';
+            PatternSummary << "GCPs Count," << Colocation.size() << '\n';
             PatternSummary << "RuntimeMicroseconds," << miningDuration << '\n';
         }
     }
@@ -130,31 +126,6 @@ int main(int argc, char **argv) {
         }
     }
 
-    {
-        string filename = "MSRCount" + to_string(k) + ".txt";
-        ofstream MSRCount(filename);
-        if (MSRCount.is_open()) {
-            std::size_t totalMSRCount = 0;
-            for (const auto &kv: RegionalPs) {
-                totalMSRCount += kv.second.first.size();
-            }
-
-            MSRCount << "TotalLCPPatterns," << RegionalPs.size() << '\n';
-            MSRCount << "TotalMSRs," << totalMSRCount << '\n';
-            MSRCount << "Pattern,MSRCount\n";
-
-            for (const auto &kv: RegionalPs) {
-                const ColocationType &pattern = kv.first;
-                std::string patternName;
-                for (const auto &f: pattern.feats) {
-                    if (!patternName.empty()) patternName += "_";
-                    patternName += f;
-                }
-                MSRCount << patternName << ',' << kv.second.first.size() << '\n';
-            }
-        }
-    }
-
     fs::path outDir = fs::path("Regional Colocation_") / std::to_string(k);
     fs::create_directories(outDir);
 
@@ -182,7 +153,7 @@ int main(int argc, char **argv) {
                 continue;
             }
 
-            Regions << "Feature,Instance,LocationX,LocationY\n";
+            Regions << "Feature,InstanceID,LocationX,LocationY\n";
             for (auto id: regionIns) {
                 const auto &feature = features[id];
                 const auto &label = mapper.getLabel(id);
